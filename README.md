@@ -42,7 +42,7 @@ La aplicacion tambien precisas el siguiente modulo de PHP para procesar imagenes
 
 * Imagemagick PHP Extension
 
-Requerido por el modulo de excel de la aplicacion
+Requerido por el modulo de excel (ver [Laravel Excel](https://laravel-excel.com/)) de la aplicación
 
 * PHP extension php_zip enabled
 * PHP extension php_xml enabled
@@ -74,6 +74,11 @@ Vision:read
 
 > **IMPORTANTE**: Revisen los pricings de Mapbox, cuenta con un tier gratuito que deberia ser suficiente para el uso que le dan a la plataforma, pero esten atentos al mismo.
 
+### Google No Captcha
+
+Como utilizamos Google reCaptcha, tambien es importante que creen un reCaptcha para el sitio y que en las variables de entorno ingresar los valores para `NOCAPTCHA_SECRET` y `NOCAPTCHA_SITEKEY`. Mas información en [https://www.google.com/recaptcha/](https://www.google.com/recaptcha/)
+
+
 ### SMTP - Mails
 
 Se requiere hacer conexion por SMTP a un servidor de correo para hacer el envio de correos electronicos. Este paso, es puramente acorde al equipo de deployment. En las variables de entorno debe configurarse esta conexion SMTP.
@@ -87,7 +92,7 @@ ubuntu:~$ cd /var/www
 ubuntu:/var/www$ git clone https://github.com/DemocraciaEnRed/sumen-app.git
 ```
 
-
+Luego...
 
 ```bash 
 ubuntu:/var/www$ cd sumen-app
@@ -96,16 +101,85 @@ ubuntu:/var/wwwsumen-app$ composer dump-autoload -o
 ubuntu:/var/wwwsumen-app$ composer install
 ```
 
-Crear un archivo .env
+Crear un archivo `.env` en la raiz
+
+```bash 
+ubuntu:/var/www$ nano .env
+```
+
+Tener en cuenta los `#####COMPLETAR######`, que son importantes. Cualquier problema en la documentacion de Laravel podran encontrar mas información: [https://laravel.com/docs/8.x/configuration#environment-configuration](https://laravel.com/docs/8.x/configuration#environment-configuration)
+
+
+> **NOTA**: Por ahora, `APP_ENV=local` y `APP_DEBUG=false` que son los estados de development, por ahora dejemoslo asi, hasta verificar que la plataforma esté en funcionamiento y se puede cambiar para un entorno de produccion a `APP_ENV=production` y `APP_DEBUG=false` (`APP_DEBUG=false` habilita el Laravel Debugbar para ver algunos logs del funcionamiento)
 
 ```
+APP_NAME=Sumen
+APP_ENV=local
+APP_KEY=#####VER-ARTISAN-KEY:GENERATE-MAS-ABAJO######
+APP_DEBUG=false
+APP_URL#####COMPLETAR######
+
+NOCAPTCHA_SECRET=#####COMPLETAR######
+NOCAPTCHA_SITEKEY=#####COMPLETAR######
+
+MAPBOX_API_KEY=#####COMPLETAR######
+MAPBOX_MAP_STYLE=mapbox://styles/mapbox/light-v10
+
+LOG_CHANNEL=stack
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=#####COMPLETAR######
+DB_USERNAME=#####COMPLETAR######
+DB_PASSWORD=#####COMPLETAR######
+
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+QUEUE_CONNECTION=redis
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+REDIS_QUEUE=mailer,default
+
+# Mailer.. si se usa mailgun, agregar lo siguiente
+MAIL_MAILER=mailgun
+MAILGUN_DOMAIN=#####COMPLETAR######
+MAILGUN_SECRET=#####COMPLETAR######
+
+# ENVs para Mailer
+MAIL_HOST=#####COMPLETAR######
+MAIL_PORT=#####COMPLETAR######
+MAIL_USERNAME=#####COMPLETAR######
+MAIL_PASSWORD=#####COMPLETAR######
+MAIL_ENCRYPTION=#####COMPLETAR######
+MAIL_FROM_ADDRESS=#####COMPLETAR######
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
 ```
 
 Correr el siguiente:
+
 ```
 ubuntu:/var/wwwsumen-app$ php artisan key:generate
 ```
+
 Copiar la `APP_KEY` y colocarla en el .env
 
 Ejecutar el siguiente comando. Se va a crear un symlink en /public de la carpeta "storage/public" que es donde se almacenan los archivos de la aplicacion. 
@@ -174,3 +248,5 @@ Una vez hecho eso, ejecutar:
 ```
 ubuntu:/var/wwwsumen-app$ php artisan config:clear
 ```
+
+Ante cualquier duda consultar mandando un email a [guillermo@democracyos.io](mailto:guillermo@democracyos.io)
