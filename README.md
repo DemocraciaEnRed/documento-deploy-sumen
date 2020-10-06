@@ -107,7 +107,7 @@ Crear un archivo `.env` en la raiz
 ubuntu:/var/www$ nano .env
 ```
 
-Tener en cuenta los `#####COMPLETAR######`, que son importantes. Cualquier problema en la documentacion de Laravel podran encontrar mas información: [https://laravel.com/docs/8.x/configuration#environment-configuration](https://laravel.com/docs/8.x/configuration#environment-configuration)
+Tener en cuenta los `#####COMPLETAR######`, que son importantes. Cualquier problema en la documentacion de Laravel podran encontrar mas información: [https://laravel.com/docs/8.x/configuration#environment-configuration](https://laravel.com/docs/7.x/configuration#environment-configuration)
 
 
 > **NOTA**: Por ahora, `APP_ENV=local` y `APP_DEBUG=false` que son los estados de development, por ahora dejemoslo asi, hasta verificar que la plataforma esté en funcionamiento y se puede cambiar para un entorno de produccion a `APP_ENV=production` y `APP_DEBUG=false` (`APP_DEBUG=false` habilita el Laravel Debugbar para ver algunos logs del funcionamiento)
