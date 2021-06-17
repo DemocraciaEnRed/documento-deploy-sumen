@@ -44,9 +44,9 @@ La aplicacion tambien precisas el siguiente modulo de PHP para procesar imagenes
 
 Requerido por el modulo de excel (ver [Laravel Excel](https://laravel-excel.com/)) de la aplicación
 
-* PHP extension php_zip enabled
-* PHP extension php_xml enabled
-* PHP extension php_gd2 enabled
+* PHP extension php_zip enabled `sudo apt-get install php-zip`
+* PHP extension php_xml enabled `sudo apt-get install php-xml`
+* PHP extension php_gd2 enabled `sudo apt-get install php-gd`
 * PHP extension php_iconv enabled 0
 * PHP extension php_simplexml enabled
 * PHP extension php_xmlreader enabled
